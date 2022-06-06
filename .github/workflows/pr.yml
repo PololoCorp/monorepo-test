@@ -36,7 +36,7 @@ jobs:
       - name: Lint
         run: yarn lint:ci
         continue-on-error: true
-        
+
       - uses: actions/upload-artifact@v3
         with:
           name: ESLint report
@@ -59,6 +59,11 @@ jobs:
     
     steps:
       - uses: actions/checkout@v1
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: ESLint report
+          
       - name: Analyze package ${{ matrix.sonarcloud-projects }}
         uses: SonarSource/sonarcloud-github-action@master
         with:
