@@ -7,7 +7,6 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: packages/package-a
 
 jobs:
   build:
@@ -39,9 +38,13 @@ jobs:
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      
+        with:
+          projectBaseDir: packages/package-a
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: packages/package-b
+         
 
         
