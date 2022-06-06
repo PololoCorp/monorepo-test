@@ -34,9 +34,14 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Lint
-        run: yarn lint
+        run: yarn lint:ci
         continue-on-error: true
-         
+        
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ESLint report
+          path: ./**/eslint-report.json
+
   scan-package:
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

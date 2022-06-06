@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js",
+    "lint:ci": "eslint **/*.js -f json -o ./eslint-report.json"
   },
   "devDependencies": {
     "eslint": "^8.17.0",

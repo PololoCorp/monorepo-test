@@ -12,6 +12,9 @@
     "lint": {
       "outputs": []
     },
+    "lint:ci": {
+      "outputs": ["eslint-report.json"]
+    },
     "deploy": {
       "dependsOn": ["build", "test", "lint"],
       "outputs": []
