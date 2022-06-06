@@ -1,0 +1,41 @@
+name: Push
+
+on:
+  push:
+    branches: [master]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    env:
+      CI: true
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+
+      - name: Install
+        run: yarn --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
+        continue-on-error: true
+
+      
+
+        
