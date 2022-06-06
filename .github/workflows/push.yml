@@ -41,8 +41,17 @@ jobs:
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        sonarcloud-projects: 
+          - packages/package-a
+          - packages/package-b 
+
     needs: install
+    
     steps:
       - uses: actions/checkout@v1
       - name: Analyze package ${{ matrix.sonarcloud-projects }}
